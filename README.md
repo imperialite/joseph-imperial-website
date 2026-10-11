@@ -17,7 +17,7 @@ Open `http://localhost:8765`. Python uses only the standard library. The site is
 
 ## Editing
 
-`build.py` generates the pages. `publications.json` contains publication records. `dist/styles.css` and `dist/site.js` contain browser presentation and progressive publication search. All papers remain visible when JavaScript is disabled. Full author lists for large collaborations can be expanded within the publication entry.
+`build.py` generates the pages. `publications.json` contains publication records. `dist/styles.css` controls presentation. Publications are a complete chronological list without search or topic filters. The Research index places News directly after About Me. Full author lists for large collaborations can be expanded within the publication entry.
 
 The comparison page uses screenshots of the actual layouts in `dist/assets/*-preview.jpg`. Regenerate them after changing the layouts.
 
