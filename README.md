@@ -1,30 +1,30 @@
-# Joseph Imperial — website design studies
+# Joseph Imperial academic website
 
-Three complete, responsive design directions for Joseph Imperial's academic website.
+Three restrained academic website layouts built from the existing website content.
 
-- **Editorial** — warm paper, forest green, serif typography.
-- **Precision** — graphite, cool blue, structured research presentation.
-- **Studio** — white, cobalt, bold typography, prominent portrait.
+1. Classic academic: centered profile, serif headings, chronological publications.
+2. Profile sidebar: persistent identity and navigation beside the main content.
+3. Publications first: compact profile followed directly by the publication list.
 
-## Preview
+## Build and preview
 
 ```powershell
 python build.py
 python -m http.server 8765 --directory dist
 ```
 
-Open `http://localhost:8765`. All three designs include topic filters, research areas, publications, biography, media, and contact links. No installation or backend is required.
+Open `http://localhost:8765`. Python uses only the standard library. The site is static and needs no installation or backend.
 
 ## Editing
 
-`build.py` is the Python content and page generator. `dist/styles.css` and `dist/site.js` contain browser presentation and progressive interactions. Run the generator after editing page content. It preserves the stylesheet, JavaScript, and assets.
+`build.py` generates the pages. `publications.json` contains publication records. `dist/styles.css` and `dist/site.js` contain browser presentation and progressive publication search. All papers remain visible when JavaScript is disabled. Full author lists for large collaborations can be expanded within the publication entry.
+
+The comparison page uses screenshots of the actual layouts in `dist/assets/*-preview.jpg`. Regenerate them after changing the layouts.
 
 ## Content and assets
 
-The biography, roles, publication information, announcements, portrait, and destination links were taken from https://www.josephimperial.com/ on 11 October 2026. Publication acceptance announcements are reproduced from the owner's site. ScrapeBench has no preprint link there and is explicitly marked forthcoming. Long author lists are abbreviated; source project links carry the full author lists.
+Biography, roles, publications, announcements, portrait, and external links came from https://www.josephimperial.com/ on 11 October 2026. Publication acceptance announcements are reproduced from that site. ScrapeBench has no preprint link in the source and is marked forthcoming. The CV link opens the original Google Drive folder.
 
-Portrait copyright remains with its owner. Instrument Serif and DM Sans are locally served Google Fonts, distributed under the SIL Open Font License. The preview does not load analytics or external scripts.
+Portrait copyright remains with its owner. DM Sans is locally served under the SIL Open Font License in `dist/assets/licenses/`. Serif headings use the system Georgia font. No analytics or third-party scripts are loaded.
 
-These are design previews. Search indexing is disabled. A production release should use the selected design as `index.html`, remove the concept selector and noindex metadata, and configure production metadata and the custom domain.
-
-The existing website and domain have not been changed.
+The pages are private design previews with search indexing disabled. A chosen production version should become `index.html`, remove the preview selector and noindex metadata, and add the final domain metadata.
