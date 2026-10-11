@@ -1,6 +1,7 @@
 """Generate factual, academic website layouts. Run with Python 3.11+."""
 from pathlib import Path
 from html import escape
+import math
 import json
 
 ROOT = Path(__file__).parent
@@ -8,7 +9,7 @@ DIST = ROOT / "dist"
 PAPERS = json.loads((ROOT / "publications.json").read_text(encoding="utf-8"))
 SCHOLAR = "https://scholar.google.com/citations?user=irs_5ekAAAAJ&hl=en"
 CV = "https://drive.google.com/drive/folders/1FvlEPuA5V5lDVFEz8fzwvr9fjEW6TRVS?usp=sharing"
-LAYOUTS = [("classic", "Classic academic"), ("sidebar", "Profile sidebar"), ("publications", "Publications first")]
+LAYOUTS = [("classic", "Academic folio"), ("sidebar", "Research index"), ("publications", "Journal layout")]
 
 PAPERS[4]["authors"] = "Joseph Marvin Imperial, Abdullah Barayan, Regina Stodden, Rodrigo Wilkens, Ricardo Munoz Sanchez, Lingyun Gao, Melissa Torgbi, Dawn Knight, Gail Forey, Reka R. Jablonkai, Ekaterina Kochmar, Robert Reynolds, Eugenio Ribeiro, Horacio Saggion, Elena Volodina, Sowmya Vajjala, Thomas Francois, Fernando Alva-Manchego, Harish Tayyar Madabushi"
 PAPERS[6]["authors"] = "Francisco Eiras, Aleksandar Petrov, Bertie Vidgen, Christian Schroeder de Witt, Fabio Pizzati, Katherine Elkins, Supratik Mukhopadhyay, Adel Bibi, Botos Csaba, Fabro Steibel, Fazl Barez, Genevieve Smith, Gianluca Guadagni, Jon Chun, Jordi Cabot, Joseph Marvin Imperial, Juan A. Nolazco-Flores, Lori Landay, Matthew Jackson, Paul Röttger, Philip H.S. Torr, Trevor Darrell, Yong Suk Lee, Jakob Foerster"
@@ -29,7 +30,11 @@ def profile_links():
     return '<div class="profile-links">' + ''.join(items) + '</div>'
 
 def identity():
-    return f'''<header class="identity"><div class="identity-text"><h1>Joseph Imperial</h1><p class="appointment">Technical AI Governance Fellow</p><p class="institution">{link('https://www.pivotal-research.org/','Pivotal Research')}, United Kingdom</p><p class="appointment second-role">PhD Candidate, UKRI CDT in ART-AI</p><p class="institution">{link('https://www.bath.ac.uk/','University of Bath')}, United Kingdom</p><a class="email" href="mailto:jmri20@bath.ac.uk">jmri20@bath.ac.uk</a>{profile_links()}</div><img class="portrait" src="assets/joseph-imperial.jpg" alt="Joseph Imperial" width="1015" height="1131" fetchpriority="high"></header>'''
+    return f'''<header class="identity"><div class="identity-text"><p class="profile-label">Research &amp; academic profile</p><h1>Joseph Imperial</h1><p class="research-summary">I research the legal alignment of AI agents and the compliance of language models with policies, regulations, and expert-defined standards.</p><div class="appointments"><div><p class="appointment">Technical AI Governance Fellow</p><p class="institution">{link('https://www.pivotal-research.org/','Pivotal Research')}, United Kingdom</p></div><div><p class="appointment second-role">PhD Candidate, UKRI CDT in ART-AI</p><p class="institution">{link('https://www.bath.ac.uk/','University of Bath')}, United Kingdom</p></div></div><div class="profile-contact"><a class="email" href="mailto:jmri20@bath.ac.uk">jmri20@bath.ac.uk</a>{profile_links()}</div></div><figure class="portrait-frame"><img class="portrait" src="assets/joseph-imperial.jpg" alt="Joseph Imperial" width="1015" height="1131" fetchpriority="high"><span class="portrait-corner" aria-hidden="true"></span></figure></header>'''
+
+def top_nav():
+    cv_link=link(CV,'CV <span aria-hidden="true">↗</span>')
+    return f'<nav class="top-nav wrap" aria-label="Main navigation"><a class="name-link" href="#top">Joseph Imperial</a><div><a href="#about">About</a><a href="#selected-publications">Publications</a><a href="#news">News</a>{cv_link}</div></nav>'
 
 def section_nav():
     return f'<nav class="section-nav" aria-label="Sections"><a href="#about">About</a><a href="#research">Research</a><a href="#selected-publications">Publications</a><a href="#news">News</a><a href="#background">Background</a>{link(CV,"CV")}</nav>'
@@ -73,22 +78,34 @@ def media():
 def footer():
     return f'''<footer><span>Joseph Imperial</span><a href="mailto:jmri20@bath.ac.uk">jmri20@bath.ac.uk</a><div>{link('https://www.linkedin.com/in/josephimperial/','LinkedIn')} · {link('https://x.com/josephimperial_','X')} · {link('https://www.researchgate.net/profile/Joseph_Marvin_Imperial','ResearchGate')}</div></footer>'''
 
+paths=[]
+for ring in range(38):
+    points=[]
+    for step in range(181):
+        angle=step*math.tau/180
+        radius=65+ring*4.15
+        x=250+radius*math.cos(angle)+17*math.sin(angle*3+ring*.075)
+        y=250+radius*.87*math.sin(angle)+18*math.cos(angle*2+ring*.075)
+        points.append(f'{x:.2f},{y:.2f}')
+    paths.append('<path d="M'+' L'.join(points)+'Z"/>')
+(DIST/'assets'/'line-motif.svg').write_text('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500"><g fill="none" stroke="#1567e8" stroke-width=".65">'+''.join(paths)+'</g></svg>',encoding='utf-8')
+
 for key,name in LAYOUTS:
     if key=='sidebar':
-        main=f'<div class="profile-column">{identity()}{section_nav()}</div><main id="main" class="content-column">{about()}{research()}{news()}{publications()}{background()}{media()}{footer()}</main>'
+        main=f'<div class="index-layout wrap"><aside class="profile-column">{identity()}{section_nav()}</aside><main id="main" class="content-column">{about()}{research()}{publications()}{news()}{background()}{media()}{footer()}</main></div>'
     elif key=='publications':
-        main=f'{identity()}{section_nav()}<main id="main"><div class="publication-intro"><p>I research the legal alignment of AI agents and the compliance of language models with policies, regulations, and expert-defined standards.</p><p class="intro-collaborators">Pivotal Research · University of Bath</p></div>{publications()}{about()}{research()}{news()}{background()}{media()}{footer()}</main>'
+        main=f'<div class="journal-masthead">{top_nav()}<div class="wrap">{identity()}</div></div><main id="main" class="content-column wrap">{publications()}{about()}{research()}{news()}{background()}{media()}{footer()}</main>'
     else:
-        main=f'{identity()}{section_nav()}<main id="main">{about()}{research()}{publications()}{news()}{background()}{media()}{footer()}</main>'
-    (DIST/f'{key}.html').write_text(head(f'Joseph Imperial | {name}')+f'<body class="academic {key}" id="top"><a class="skip-link" href="#main">Skip to content</a>{preview_bar(key)}<div class="page">{main}</div></body></html>',encoding='utf-8')
+        main=f'<div class="folio-masthead">{top_nav()}<div class="wrap">{identity()}</div></div><main id="main" class="content-column wrap">{about()}{research()}{publications()}{news()}{background()}{media()}{footer()}</main>'
+    (DIST/f'{key}.html').write_text(head(f'Joseph Imperial | {name}')+f'<body class="academic {key}" id="top"><a class="skip-link" href="#main">Skip to content</a>{preview_bar(key)}{main}</body></html>',encoding='utf-8')
 
 descriptions={
-    'classic':'A centered profile with serif headings, a short biography, and a chronological publication list.',
-    'sidebar':'A persistent profile and navigation beside the research, news, and publications.',
-    'publications':'A compact profile followed directly by publications grouped by year. Biography and academic history follow.'
+    'classic':'A charcoal masthead, blue geometric linework, and an ivory reading surface. Biography and research lead into the publications.',
+    'sidebar':'A charcoal profile column beside a spacious research index. Blue margin details organize the academic content.',
+    'publications':'An ivory masthead with serif typography and an offset portrait. Publications appear first, with the latest paper highlighted.'
 }
 cards=''.join(f'''<article class="layout-option"><a class="screenshot-link" href="{key}.html"><img src="assets/{key}-preview.jpg" alt="{name} layout preview" width="1264" height="712"></a><h2><a href="{key}.html">{i}. {name}</a></h2><p>{descriptions[key]}</p><a class="open-layout" href="{key}.html">Open layout <span aria-hidden="true">→</span></a></article>''' for i,(key,name) in enumerate(LAYOUTS,1))
-gallery=head('Joseph Imperial | Academic website options')+f'''<body class="comparison"><main class="comparison-page"><header class="comparison-heading"><p>Joseph Imperial</p><h1>Academic website options</h1><p>Three layouts using your affiliations, research interests, publications, and academic background.</p></header><div class="layout-options">{cards}</div><p class="comparison-note">Each preview includes the full page. Use the navigation at the top to compare layouts.</p></main></body></html>'''
+gallery=head('Joseph Imperial | Academic website options')+f'''<body class="comparison"><main class="comparison-page"><header class="comparison-heading"><div><p>Joseph Imperial</p><h1>Academic website options</h1><p>Charcoal, ivory, and blue. Three distinct layouts for your research and academic profile.</p></div><div class="palette" aria-label="Color palette: charcoal, ivory, blue"><i></i><i></i><i></i></div></header><div class="layout-options">{cards}</div><p class="comparison-note">Open each layout to see the full page. The navigation at the top lets you switch between options.</p></main></body></html>'''
 (DIST/'index.html').write_text(gallery,encoding='utf-8')
 
 # Retain previously shared URLs without retaining any rejected presentation.

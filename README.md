@@ -1,10 +1,10 @@
 # Joseph Imperial academic website
 
-Three restrained academic website layouts built from the existing website content.
+Three academic website layouts using a charcoal, ivory, and blue palette informed by the Institute for Law & AI website. The fine-line motif is original vector artwork generated in Python.
 
-1. Classic academic: centered profile, serif headings, chronological publications.
-2. Profile sidebar: persistent identity and navigation beside the main content.
-3. Publications first: compact profile followed directly by the publication list.
+1. Academic folio: charcoal masthead, blue linework, ivory reading columns.
+2. Research index: charcoal profile column beside a serif academic index.
+3. Journal layout: ivory masthead, offset portrait, and prominent chronological publications.
 
 ## Build and preview
 
@@ -25,6 +25,6 @@ The comparison page uses screenshots of the actual layouts in `dist/assets/*-pre
 
 Biography, roles, publications, announcements, portrait, and external links came from https://www.josephimperial.com/ on 11 October 2026. Publication acceptance announcements are reproduced from that site. ScrapeBench has no preprint link in the source and is marked forthcoming. The CV link opens the original Google Drive folder.
 
-Portrait copyright remains with its owner. DM Sans is locally served under the SIL Open Font License in `dist/assets/licenses/`. Serif headings use the system Georgia font. No analytics or third-party scripts are loaded.
+Portrait copyright remains with its owner. DM Sans and Source Serif 4 are locally served under the SIL Open Font License in `dist/assets/licenses/`. The reference's logo, font files, images, and artwork are not used. No analytics or third-party scripts are loaded.
 
 The pages are private design previews with search indexing disabled. A chosen production version should become `index.html`, remove the preview selector and noindex metadata, and add the final domain metadata.

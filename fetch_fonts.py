@@ -4,12 +4,12 @@ import re
 from urllib.request import Request, urlopen
 
 root = Path(__file__).parent / "dist" / "assets"
-url = "https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap"
+url = "https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Source+Serif+4:ital,wght@0,400;0,500;1,400&display=swap"
 req = Request(url, headers={"User-Agent": "Mozilla/5.0"})
 css = urlopen(req).read().decode()
 for i, remote in enumerate(dict.fromkeys(re.findall(r"url\((https:[^)]+)\)", css))):
     extension = ".woff2" if ".woff2" in remote else ".ttf"
-    name = f"font-{i}{extension}"
+    name = f"academic-font-{i}{extension}"
     (root / name).write_bytes(urlopen(remote).read())
     css = css.replace(remote, name)
 (root / "fonts.css").write_text(css, encoding="utf-8")
