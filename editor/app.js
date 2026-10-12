@@ -2,7 +2,7 @@
 
 (() => {
   const sections = [
-    { id: "profile", title: "Profile", description: "Update your name, contact details, research summary, and current appointments." },
+    { id: "profile", title: "Profile", description: "Update your name, contact details, website description, and current appointments." },
     { id: "about", title: "About Me", description: "Edit your introduction one paragraph at a time. Keep paragraphs in the order you want them to appear." },
     { id: "news", title: "News", description: "Add updates and arrange them with the most recent news first." },
     { id: "publications", title: "Selected Publications", description: "Edit publication details and author lists. Use the arrows to arrange papers. Papers appear together by year." },
@@ -252,7 +252,7 @@
     const grid = element("div", "field-grid");
     for (const [key, label, options] of [
       ["name", "Full name", {}], ["email", "Email address", { type: "email" }],
-      ["description", "Research summary", { multiline: true, full: true, rows: 3, hint: "A short plain-text description of your research." }],
+      ["description", "Website description", { multiline: true, full: true, rows: 3, hint: "Used in search results and link previews." }],
       ["scholar_url", "Google Scholar link", { type: "url" }], ["cv_url", "CV link", { type: "url" }],
       ["github_url", "GitHub link", { type: "url" }], ["anthology_url", "ACL Anthology link", { type: "url" }]
     ]) grid.append(field(label, site[key], (value) => { site[key] = value; }, options));

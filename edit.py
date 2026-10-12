@@ -219,7 +219,7 @@ def publishing_status():
     global STATUS
     if time.monotonic() - STATUS[0] < 60:
         return STATUS[1]
-    status = {"publish_available": bool(shutil.which("git") and shutil.which("gh")), "publish_label": "Save to GitHub", "message": "Saves a backup to the private GitHub repository. Public hosting is not enabled yet."}
+    status = {"publish_available": bool(shutil.which("git") and shutil.which("gh")), "publish_label": "Save to GitHub", "message": "Saves your website records to GitHub. Automatic public publishing is not enabled yet."}
     if status["publish_available"]:
         try:
             command(["gh", "api", f"repos/{REPO}", "--jq", ".permissions.push"], timeout=10)
