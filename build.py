@@ -29,7 +29,7 @@ def profile_links():
     return '<div class="profile-links">' + ''.join(items) + '</div>'
 
 def identity():
-    return f'''<header class="identity"><div class="identity-text"><p class="profile-label">Research &amp; Academic Profile</p><h1>Joseph Imperial</h1><p class="research-summary">I research the legal alignment of AI agents and the compliance of language models with policies, regulations, and expert-defined standards.</p><div class="appointments">{''.join(f'<div><p class="appointment">{role}</p></div>' for role in CONTENT['profile'])}</div><div class="profile-contact"><a class="email" href="mailto:jmri20@bath.ac.uk">jmri20@bath.ac.uk</a>{profile_links()}</div></div><figure class="portrait-frame"><img class="portrait" src="assets/joseph-imperial.jpg" alt="Joseph Imperial" width="1015" height="1131" fetchpriority="high"><span class="portrait-corner" aria-hidden="true"></span></figure></header>'''
+    return f'''<header class="identity"><div class="identity-text"><h1>Joseph Imperial</h1><p class="research-summary">I research the legal alignment of AI agents and the compliance of language models with policies, regulations, and expert-defined standards.</p><div class="appointments">{''.join(f'<div><p class="appointment">{role}</p></div>' for role in CONTENT['profile'])}</div><div class="profile-contact"><a class="email" href="mailto:jmri20@bath.ac.uk">jmri20@bath.ac.uk</a>{profile_links()}</div></div><figure class="portrait-frame"><img class="portrait" src="assets/joseph-imperial.jpg" alt="Joseph Imperial" width="1015" height="1131" fetchpriority="high"><span class="portrait-corner" aria-hidden="true"></span></figure></header>'''
 
 def top_nav():
     cv_link=link(CV,'CV <span aria-hidden="true">↗</span>')
@@ -56,7 +56,8 @@ def publications():
                 action=link(paper['url'],'Project Page' if 'project' in paper['link_label'].lower() else 'Paper','paper-link')
             else:
                 action='<span class="preprint-note">Preprint forthcoming</span>'
-            rows.append(f'<article class="paper" data-topic="{paper["topic"]}" data-year="{year}"><h4>{title}</h4>{authors}<div class="paper-footer"><span class="venue">{venue}</span>{action}</div></article>')
+            paper_class = "paper paper-featured" if paper.get("featured") else "paper"
+            rows.append(f'<article class="{paper_class}" data-topic="{paper["topic"]}" data-year="{year}"><h4>{title}</h4>{authors}<div class="paper-footer"><span class="venue">{venue}</span>{action}</div></article>')
         groups.append(f'<div class="year-group"><h3>{year}</h3><div>{"".join(rows)}</div></div>')
     return f'''<section class="publications" id="selected-publications"><div class="heading-row"><h2>Selected Publications</h2><p class="publication-note">{CONTENT['publication_note']}</p></div><div class="publication-list">{''.join(groups)}</div></section>'''
 
@@ -97,7 +98,7 @@ def socials():
 
 
 def footer():
-    return '<footer><span>Joseph Imperial</span><a href="mailto:jmri20@bath.ac.uk">jmri20@bath.ac.uk</a></footer>'
+    return f"""<footer><span>Joseph Imperial</span><a href="mailto:jmri20@bath.ac.uk">jmri20@bath.ac.uk</a><p class="design-credit">This website's design takes inspiration from the {link('https://law-ai.org/', 'Institute for Law &amp; AI website')}.</p></footer>"""
 
 
 paths=[]
