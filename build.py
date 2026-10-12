@@ -37,7 +37,7 @@ def top_nav():
     return f'<nav class="top-nav wrap" aria-label="Main navigation"><a class="name-link" href="#top">Joseph Imperial</a><div><a href="#about">About Me</a><a href="#news">News</a><a href="#selected-publications">Publications</a>{cv_link}</div></nav>'
 
 def section_nav():
-    return f'<nav class="section-nav" aria-label="Sections"><a href="#about">About Me</a><a href="#news">News</a><a href="#selected-publications">Publications</a><a href="#background">Background</a>{link(CV,"CV")}</nav>'
+    return f'<nav class="section-nav" aria-label="Sections"><a href="#about">About Me</a><a href="#news">News</a><a href="#selected-publications">Publications</a><a href="#experience">Experience</a><a href="#education">Education</a>{link(CV,"CV")}</nav>'
 
 def about():
     return f'''<section class="about" id="about"><h2>About Me</h2><p>I am a Technical AI Governance Fellow at Pivotal Research and a PhD Candidate in the UKRI Centre for Doctoral Training in Accountable, Responsible and Transparent AI at the University of Bath. My research focuses on the legal alignment of AI agents and the compliance of language models with policies, regulations, and expert-defined standards.</p><p>At Pivotal Research, I work with {link('https://www.noamkolt.com/','Noam Kolt')}. I also collaborate with {link('https://law-ai.org/team/benjamin-brady/','Ben Brady')} and {link('https://cullenokeefe.com/','Cullen O’Keefe')} at the Institute for Law &amp; AI on benchmarks for law-following AI. My doctoral research is supervised by {link('https://www.harishtayyarmadabushi.com/','Harish Tayyar Madabushi')} and {link('https://researchportal.bath.ac.uk/en/persons/gail-forey-2','Gail Forey')}.</p></section>'''
@@ -49,11 +49,7 @@ def publications():
         for paper in (p for p in PAPERS if p['year']==year):
             title=link(paper['url'], escape(paper['title']), 'paper-title') if paper['url'] else '<span class="paper-title">'+escape(paper['title'])+'</span>'
             authors=escape(paper['authors']).replace('Joseph Marvin Imperial','<strong>Joseph Marvin Imperial</strong>')
-            if len(paper['authors'])>300:
-                short='Joseph Marvin Imperial et al.' if paper['authors'].startswith('Joseph') else 'Francisco Eiras et al., including Joseph Marvin Imperial'
-                authors=f'<details class="authors-details"><summary>{escape(short)} <span>Full author list</span></summary><p>{authors}</p></details>'
-            else:
-                authors=f'<p class="authors">{authors}</p>'
+            authors=f'<p class="authors">{authors}</p>'
             venue=paper['venue'].replace(' · ',' — ')
             if paper['url']:
                 action=link(paper['url'],'Project Page' if 'project' in paper['link_label'].lower() else 'Paper','paper-link')
@@ -66,8 +62,17 @@ def publications():
 def news():
     return f'''<section class="news" id="news"><h2>News</h2><ul><li><strong>NeurIPS 2026.</strong> ScrapeBench, GlobalPIQA, and Jarvis-Bench have been accepted. Preprints forthcoming.</li><li><strong>EMNLP 2026.</strong> {link('https://arxiv.org/abs/2606.05421','ComplexityMT')} and {link('https://arxiv.org/abs/2503.04736','Rethinking Standard Compliance in the LLM Era')} have been accepted.</li><li><strong>Nature.</strong> Our collaborative benchmark, {link('https://www.nature.com/articles/s41586-025-09962-4','Humanity’s Last Exam')}, is now published.</li><li><strong>Invited panel.</strong> {link('https://law-ai.org/event/2026-workshop-on-law-following-ai/','Workshop on Law-Following AI')}, hosted by the Institute for Law &amp; AI at Jesus College, Cambridge.</li></ul></section>'''
 
-def background():
-    return '''<section id="background" class="background"><h2>Education and Appointments</h2><dl class="timeline"><div><dt>2026–present</dt><dd><strong>Technical AI Governance Fellow</strong><span>Pivotal Research, London Initiative for Safe AI</span></dd></div><div><dt>2022–2026<br><small>(expected)</small></dt><dd><strong>PhD in Accountable, Responsible and Transparent AI</strong><span>University of Bath, United Kingdom</span></dd></div><div><dt>2018–present<br><small>(on study leave)</small></dt><dd><strong>Senior NLP Researcher</strong><span>National University, Philippines</span><p>Managed the Human Language Technology Lab and collaborated on NLP applications in education and food nutrition.</p></dd></div><div><dt>2018–2021</dt><dd><strong>M.S. in Computer Science</strong><span>De La Salle University, Philippines</span></dd></div><div><dt>2017–2018</dt><dd><strong>Research Fellow</strong><span>National University and Philippine-California Advanced Research Institutes</span><p>Text and speech analytics for disaster risk management, in collaboration with the University of California, Berkeley.</p></dd></div></dl></section><section class="awards"><h2>Awards &amp; Recognition</h2><ul><li>Outstanding Reviewer Award, ICML (2026, 2024) and ACL (2023)</li><li>Pivotal Research Fellowship (2025)</li><li>Doctoral Recognition Award, University of Bath (2024)</li><li>Researcher of the Year, National University Philippines (2023)</li><li>UKRI CDT Doctoral Fellowship (2022–2026)</li><li>Google AI and Tensorflow Grant (2021)</li></ul></section>'''
+def experience():
+    return """<section id="experience" class="background experience"><h2>Experience</h2><dl class="timeline"><div><dt>2026–present</dt><dd><strong>Technical AI Governance Fellow</strong><span>Pivotal Research, London Initiative for Safe AI</span></dd></div><div><dt>2018–present<br><small>(on study leave)</small></dt><dd><strong>Senior NLP Researcher</strong><span>National University, Philippines</span><p>Managed the Human Language Technology Lab and collaborated on NLP applications in education and food nutrition.</p></dd></div><div><dt>2017–2018</dt><dd><strong>Research Fellow</strong><span>National University and Philippine-California Advanced Research Institutes</span><p>Text and speech analytics for disaster risk management, in collaboration with the University of California, Berkeley.</p></dd></div></dl></section>"""
+
+
+def education():
+    return """<section id="education" class="background education"><h2>Education</h2><dl class="timeline"><div><dt>2022–2026<br><small>(expected)</small></dt><dd><strong>PhD in Accountable, Responsible and Transparent AI</strong><span>University of Bath, United Kingdom</span></dd></div><div><dt>2018–2021</dt><dd><strong>M.S. in Computer Science</strong><span>De La Salle University, Philippines</span></dd></div></dl></section>"""
+
+
+def awards():
+    return """<section class="awards"><h2>Awards &amp; Recognition</h2><ul><li>Outstanding Reviewer Award, ICML (2026, 2024) and ACL (2023)</li><li>Pivotal Research Fellowship (2025)</li><li>Doctoral Recognition Award, University of Bath (2024)</li><li>Researcher of the Year, National University Philippines (2023)</li><li>UKRI CDT Doctoral Fellowship (2022–2026)</li><li>Google AI and Tensorflow Grant (2021)</li></ul></section>"""
+
 
 def media():
     return f'''<section class="media"><h2>Media Presence</h2><ul><li><span>AIHub</span>{link('https://aihub.org/2025/04/02/interview-with-joseph-marvin-imperial-aligning-generative-ai-with-technical-standards/','Aligning generative AI with technical standards')}</li><li><span>New Scientist</span>{link('https://www.newscientist.com/article/2473622-leading-ai-models-fail-new-test-of-artificial-general-intelligence/','Evaluating artificial general intelligence')}</li><li><span>Newsweek</span>{link('https://www.newsweek.com/openai-warns-us-government-agencies-of-rogue-activity-12492213','AI agents and safety')}</li></ul></section>'''
@@ -89,11 +94,11 @@ for ring in range(38):
 
 for key,name in LAYOUTS:
     if key=='sidebar':
-        main=f'<div class="index-layout wrap"><aside class="profile-column">{identity()}{section_nav()}</aside><main id="main" class="content-column">{about()}{news()}{publications()}{background()}{media()}{footer()}</main></div>'
+        main=f'<div class="index-layout wrap"><aside class="profile-column">{identity()}{section_nav()}</aside><main id="main" class="content-column">{about()}{news()}{publications()}{experience()}{education()}{awards()}{media()}{footer()}</main></div>'
     elif key=='publications':
-        main=f'<div class="journal-masthead">{top_nav()}<div class="wrap">{identity()}</div></div><main id="main" class="content-column wrap">{publications()}{about()}{news()}{background()}{media()}{footer()}</main>'
+        main=f'<div class="journal-masthead">{top_nav()}<div class="wrap">{identity()}</div></div><main id="main" class="content-column wrap">{publications()}{about()}{news()}{experience()}{education()}{awards()}{media()}{footer()}</main>'
     else:
-        main=f'<div class="folio-masthead">{top_nav()}<div class="wrap">{identity()}</div></div><main id="main" class="content-column wrap">{about()}{news()}{publications()}{background()}{media()}{footer()}</main>'
+        main=f'<div class="folio-masthead">{top_nav()}<div class="wrap">{identity()}</div></div><main id="main" class="content-column wrap">{about()}{news()}{publications()}{experience()}{education()}{awards()}{media()}{footer()}</main>'
     (DIST/f'{key}.html').write_text(head(f'Joseph Imperial | {name}')+f'<body class="academic {key}" id="top"><a class="skip-link" href="#main">Skip to content</a>{preview_bar(key)}{main}</body></html>',encoding='utf-8')
 
 descriptions={
