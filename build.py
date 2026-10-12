@@ -3,15 +3,18 @@ from pathlib import Path
 from html import escape
 import math
 import json
+import sys
 
 ROOT = Path(__file__).parent
 DIST = ROOT / "dist"
 PAPERS = json.loads((ROOT / "publications.json").read_text(encoding="utf-8"))
-SCHOLAR = "https://scholar.google.com/citations?user=irs_5ekAAAAJ&hl=en"
-CV = "https://drive.google.com/drive/folders/1FvlEPuA5V5lDVFEz8fzwvr9fjEW6TRVS?usp=sharing"
 LAYOUTS = [("classic", "Academic folio"), ("sidebar", "Research index"), ("publications", "Journal layout")]
 
 CONTENT = json.loads((ROOT / "content.json").read_text(encoding="utf-8"))
+SITE = CONTENT["site"]
+SCHOLAR, CV = SITE["scholar_url"], SITE["cv_url"]
+PUBLIC = "--public" in sys.argv
+
 
 
 def link(url, label, cls=""):
@@ -19,17 +22,18 @@ def link(url, label, cls=""):
 
 def preview_bar(active):
     items = ''.join(f'<a href="{key}.html" {"aria-current=page" if key == active else ""}>{i}. {name}</a>' for i,(key,name) in enumerate(LAYOUTS,1))
-    return f'<div class="preview-bar"><a href="index.html" class="compare-link">Compare layouts</a><nav aria-label="Website layout options">{items}</nav></div>'
+    return f'<div class="preview-bar"><a href="design-options.html" class="compare-link">Compare layouts</a><nav aria-label="Website layout options">{items}</nav></div>'
 
-def head(title):
-    return f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><meta name="description" content="Joseph Imperial. Technical AI Governance Fellow at Pivotal Research and PhD Candidate at the University of Bath. Research, publications, and academic background."><title>{title}</title><link rel="icon" type="image/svg+xml" href="assets/favicon.svg"><link rel="stylesheet" href="assets/fonts.css"><link rel="stylesheet" href="styles.css"></head>'''
+def head(title, indexable=False):
+    robots = '' if PUBLIC and indexable else '<meta name="robots" content="noindex,nofollow">'
+    return f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">{robots}<meta name="description" content="{escape(SITE['description'], quote=True)}"><title>{title}</title><link rel="icon" type="image/svg+xml" href="assets/favicon.svg"><link rel="stylesheet" href="assets/fonts.css"><link rel="stylesheet" href="styles.css"></head>'''
 
 def profile_links():
-    items = [link(SCHOLAR,"Google Scholar"),link("https://github.com/imperialite","Github"),link("https://aclanthology.org/people/joseph-marvin-imperial/","ACL Anthology"),link(CV,"CV")]
+    items = [link(SCHOLAR,"Google Scholar"),link(SITE["github_url"],"Github"),link(SITE["anthology_url"],"ACL Anthology"),link(CV,"CV")]
     return '<div class="profile-links">' + ''.join(items) + '</div>'
 
 def identity():
-    return f'''<header class="identity"><div class="identity-text"><h1>Joseph Imperial</h1><p class="research-summary">I research the legal alignment of AI agents and the compliance of language models with policies, regulations, and expert-defined standards.</p><div class="appointments">{''.join(f'<div><p class="appointment">{role}</p></div>' for role in CONTENT['profile'])}</div><div class="profile-contact"><a class="email" href="mailto:jmri20@bath.ac.uk">jmri20@bath.ac.uk</a>{profile_links()}</div></div><figure class="portrait-frame"><img class="portrait" src="assets/joseph-imperial.jpg" alt="Joseph Imperial" width="1015" height="1131" fetchpriority="high"><span class="portrait-corner" aria-hidden="true"></span></figure></header>'''
+    return f'''<header class="identity"><div class="identity-text"><h1>{escape(SITE["name"])}</h1><p class="research-summary">I research the legal alignment of AI agents and the compliance of language models with policies, regulations, and expert-defined standards.</p><div class="appointments">{''.join(f'<div><p class="appointment">{role}</p></div>' for role in CONTENT['profile'])}</div><div class="profile-contact"><a class="email" href="mailto:{escape(SITE['email'],quote=True)}">{escape(SITE['email'])}</a>{profile_links()}</div></div><figure class="portrait-frame"><img class="portrait" src="assets/joseph-imperial.jpg" alt="Joseph Imperial" width="1015" height="1131" fetchpriority="high"><span class="portrait-corner" aria-hidden="true"></span></figure></header>'''
 
 def top_nav():
     cv_link=link(CV,'CV <span aria-hidden="true">↗</span>')
@@ -55,10 +59,10 @@ def publications():
             if paper['url']:
                 action=link(paper['url'],'Project Page' if 'project' in paper['link_label'].lower() else 'Paper','paper-link')
             else:
-                action='<span class="preprint-note">Preprint forthcoming</span>'
+                action=f'<span class="preprint-note">{escape(paper["link_label"] or "Preprint forthcoming")}</span>'
             paper_class = "paper paper-featured" if paper.get("featured") else "paper"
-            rows.append(f'<article class="{paper_class}" data-topic="{paper["topic"]}" data-year="{year}"><h4>{title}</h4>{authors}<div class="paper-footer"><span class="venue">{venue}</span>{action}</div></article>')
-        groups.append(f'<div class="year-group"><h3>{year}</h3><div>{"".join(rows)}</div></div>')
+            rows.append(f'<article class="{paper_class}" data-topic="{escape(paper["topic"],quote=True)}" data-year="{escape(year,quote=True)}"><h4>{title}</h4>{authors}<div class="paper-footer"><span class="venue">{venue}</span>{action}</div></article>')
+        groups.append(f'<div class="year-group"><h3>{escape(year)}</h3><div>{"".join(rows)}</div></div>')
     return f'''<section class="publications" id="selected-publications"><div class="heading-row"><h2>Selected Publications</h2><p class="publication-note">{CONTENT['publication_note']}</p></div><div class="publication-list">{''.join(groups)}</div></section>'''
 
 def news():
@@ -98,7 +102,7 @@ def socials():
 
 
 def footer():
-    return f"""<footer><span>Joseph Imperial</span><a href="mailto:jmri20@bath.ac.uk">jmri20@bath.ac.uk</a><p class="design-credit">This website's design takes inspiration from the {link('https://law-ai.org/', 'Institute for Law &amp; AI website')}.</p></footer>"""
+    return f"""<footer><span>{escape(SITE['name'])}</span><a href="mailto:{escape(SITE['email'],quote=True)}">{escape(SITE['email'])}</a><p class="design-credit">This website's design and color palette are inspired by the {link('https://law-ai.org/', 'Institute for Law &amp; AI')} website.</p></footer>"""
 
 
 paths=[]
@@ -120,6 +124,8 @@ for key,name in LAYOUTS:
         main=f'<div class="journal-masthead">{top_nav()}<div class="wrap">{identity()}</div></div><main id="main" class="content-column wrap">{publications()}{about()}{news()}{experience()}{education()}{awards()}{media()}{socials()}{footer()}</main>'
     else:
         main=f'<div class="folio-masthead">{top_nav()}<div class="wrap">{identity()}</div></div><main id="main" class="content-column wrap">{about()}{news()}{publications()}{experience()}{education()}{awards()}{media()}{socials()}{footer()}</main>'
+    if key == "sidebar":
+        (DIST/"index.html").write_text(head(escape(SITE["name"]), indexable=True)+f'<body class="academic sidebar chosen-site" id="top"><a class="skip-link" href="#main">Skip to content</a>{main}</body></html>',encoding="utf-8")
     (DIST/f'{key}.html').write_text(head(f'Joseph Imperial | {name}')+f'<body class="academic {key}" id="top"><a class="skip-link" href="#main">Skip to content</a>{preview_bar(key)}{main}</body></html>',encoding='utf-8')
 
 descriptions={
@@ -129,9 +135,9 @@ descriptions={
 }
 cards=''.join(f'''<article class="layout-option"><a class="screenshot-link" href="{key}.html"><img src="assets/{key}-preview.jpg" alt="{name} layout preview" width="1264" height="712"></a><h2><a href="{key}.html">{i}. {name}</a></h2><p>{descriptions[key]}</p><a class="open-layout" href="{key}.html">Open layout <span aria-hidden="true">→</span></a></article>''' for i,(key,name) in enumerate(LAYOUTS,1))
 gallery=head('Joseph Imperial | Academic website options')+f'''<body class="comparison"><main class="comparison-page"><header class="comparison-heading"><div><p>Joseph Imperial</p><h1>Academic website options</h1><p>Charcoal, ivory, and blue. Three distinct layouts for your research and academic profile.</p></div><div class="palette" aria-label="Color palette: charcoal, ivory, blue"><i></i><i></i><i></i></div></header><div class="layout-options">{cards}</div><p class="comparison-note">Open each layout to see the full page. The navigation at the top lets you switch between options.</p></main></body></html>'''
-(DIST/'index.html').write_text(gallery,encoding='utf-8')
+(DIST/'design-options.html').write_text(gallery,encoding='utf-8')
 
 # Retain previously shared URLs without retaining any rejected presentation.
 for old,new in [('editorial','classic'),('precision','sidebar'),('studio','publications')]:
     (DIST/f'{old}.html').write_text(f'<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="robots" content="noindex,nofollow"><meta http-equiv="refresh" content="0;url={new}.html"><title>Joseph Imperial</title></head><body><a href="{new}.html">Joseph Imperial — academic website preview</a></body></html>',encoding='utf-8')
-print('Built three academic layouts and the comparison page.')
+print('Built the Research index homepage and retained design previews.')

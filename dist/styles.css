@@ -100,3 +100,8 @@ footer .design-credit { flex-basis:100%; font-size:11px; line-height:1.6; margin
   body.academic.sidebar .appointments { grid-row:2; }
   body.academic.sidebar .profile-contact { grid-row:3; }
 }
+
+/* Approved website, without the design selection toolbar. */
+html:has(.chosen-site) { scroll-padding-top:32px; }
+body.chosen-site { border-top:4px solid var(--blue,#1567e8); }
+@media(min-width:601px) and (min-height:1100px) { body.chosen-site .profile-column { top:32px; } }

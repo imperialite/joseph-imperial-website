@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Academic website editor</title>
+  <link rel="stylesheet" href="/style.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#editor-content">Skip to editing</a>
+  <header class="app-header">
+    <div class="app-title"><span class="app-mark" aria-hidden="true"></span><div><h1>Website editor</h1><p id="save-state" role="status">Loading your content…</p></div></div>
+    <div class="header-actions">
+      <a class="button button-secondary" href="/preview/" target="_blank" rel="noopener noreferrer" title="Open the last saved version of your website">Preview website <span aria-hidden="true">↗</span></a>
+      <button class="button button-primary" id="save-button" type="button" disabled>Save changes</button>
+      <button class="button button-dark" id="publish-button" type="button" hidden disabled>Save to GitHub</button>
+    </div>
+  </header>
+  <div class="app-layout">
+    <aside class="section-sidebar">
+      <p class="nav-label">Website sections</p>
+      <nav id="section-nav" aria-label="Editor sections"></nav>
+      <p class="save-help">Save changes updates your local website preview.</p>
+      <p class="save-help" id="publish-help"></p>
+    </aside>
+    <main id="editor-content" tabindex="-1">
+      <div id="message" class="message" hidden><p id="message-text"></p><button type="button" class="message-dismiss" aria-label="Dismiss message">×</button></div>
+      <div id="undo-notice" class="undo-notice" hidden><span id="undo-text"></span><button type="button" id="undo-button">Undo removal</button></div>
+      <div id="loading-state" class="loading-state">Loading your website…</div>
+      <form id="section-form" novalidate hidden>
+        <div class="section-heading"><div><p class="section-eyebrow" id="section-eyebrow">Edit content</p><h2 id="section-title"></h2><p id="section-description"></p></div></div>
+        <div id="section-fields"></div>
+      </form>
+      <div class="editor-footer" id="editor-footer" hidden><span id="footer-state">All changes saved locally.</span><a href="/preview/" target="_blank" rel="noopener noreferrer">Open saved preview <span aria-hidden="true">↗</span></a></div>
+    </main>
+  </div>
+  <dialog id="link-dialog" aria-labelledby="link-dialog-title">
+    <form id="link-form">
+      <h2 id="link-dialog-title">Add a link</h2>
+      <label for="link-label">Link text</label><input id="link-label" name="label" required autocomplete="off">
+      <label for="link-url">Web address</label><input id="link-url" name="url" type="url" placeholder="https://" required autocomplete="off">
+      <p class="field-hint">The link will be inserted into your text.</p>
+      <div class="dialog-actions"><button type="button" class="button button-secondary" id="link-cancel">Cancel</button><button type="submit" class="button button-primary">Insert link</button></div>
+    </form>
+  </dialog>
+</body>
+</html>

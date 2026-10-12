@@ -168,5 +168,14 @@
       "label": "CV",
       "url": "https://drive.google.com/drive/folders/1FvlEPuA5V5lDVFEz8fzwvr9fjEW6TRVS?usp=sharing"
     }
-  ]
+  ],
+  "site": {
+    "name": "Joseph Imperial",
+    "email": "jmri20@bath.ac.uk",
+    "description": "Joseph Imperial. Technical AI Governance Fellow at Pivotal Research and PhD Candidate at the University of Bath. Research, publications, and academic background.",
+    "scholar_url": "https://scholar.google.com/citations?user=irs_5ekAAAAJ&hl=en",
+    "cv_url": "https://drive.google.com/drive/folders/1FvlEPuA5V5lDVFEz8fzwvr9fjEW6TRVS?usp=sharing",
+    "github_url": "https://github.com/imperialite",
+    "anthology_url": "https://aclanthology.org/people/joseph-marvin-imperial/"
+  }
 }
