@@ -9,6 +9,8 @@ import importlib.util
 import json
 from pathlib import Path
 import shutil
+import subprocess
+import sys
 import tempfile
 from threading import Thread
 import unittest
@@ -196,6 +198,72 @@ class RecordsTests(FixtureCase):
                 editor.save_records(payload)
                 social = next(row for row in self.content()["socials"] if row["label"] == label)
                 self.assertEqual(social["url"], url)
+
+
+class AnalyticsTests(FixtureCase):
+    def build(self, public=False):
+        args = [sys.executable, str(self.root / "build.py")]
+        if public:
+            args.append("--public")
+        result = subprocess.run(args, capture_output=True, text=True, timeout=30)
+        self.assertEqual(result.returncode, 0, result.stderr)
+        return {
+            path.name: path.read_text(encoding="utf-8")
+            for path in (self.root / "dist").glob("*.html")
+        }
+
+    def test_optional_analytics_id_accepts_missing_blank_and_ga4_ids(self):
+        payload = editor.load_records()
+        payload["content"]["site"].pop("analytics_id", None)
+        editor.validate(payload)
+        for value in ("", "G-ABC123", "G-1"):
+            with self.subTest(value=value):
+                payload["content"]["site"]["analytics_id"] = value
+                editor.validate(payload)
+
+    def test_invalid_analytics_id_is_refused_without_changing_files(self):
+        before = self.snapshot()
+        for value in ("G-", "UA-12345-1", "g-ABC123", "G-abc123", " G-ABC123", "G-ABC123 ", "G-ABC123\n", 'G-ABC123\" onload=\"alert(1)', None, 123):
+            with self.subTest(value=value):
+                payload = editor.load_records()
+                payload["content"]["site"]["analytics_id"] = value
+                with self.assertRaises(ValueError):
+                    editor.save_records(payload)
+                self.assertEqual(self.snapshot(), before)
+
+    def test_analytics_id_saves_without_tracking_local_preview(self):
+        payload = editor.load_records()
+        payload["content"]["site"]["analytics_id"] = "G-TEST123"
+        editor.save_records(payload)
+        self.assertEqual(editor.load_records()["content"]["site"]["analytics_id"], "G-TEST123")
+        for path in (self.root / "dist").glob("*.html"):
+            with self.subTest(page=path.name):
+                html = path.read_text(encoding="utf-8")
+                self.assertNotIn("assets/analytics.js", html)
+                self.assertNotIn("data-measurement-id", html)
+
+    def test_analytics_script_is_included_only_on_configured_public_homepage(self):
+        for value in (None, "", "G-TEST123"):
+            content = self.content()
+            if value is None:
+                content["site"].pop("analytics_id", None)
+            else:
+                content["site"]["analytics_id"] = value
+            (self.root / "content.json").write_text(json.dumps(content), encoding="utf-8")
+            for public in (False, True):
+                pages = self.build(public=public)
+                self.assertIn("index.html", pages)
+                self.assertIn("sidebar.html", pages)
+                self.assertIn("design-options.html", pages)
+                for name, html in pages.items():
+                    with self.subTest(value=value, public=public, page=name):
+                        if value and public and name == "index.html":
+                            self.assertEqual(html.count('src="assets/analytics.js"'), 1)
+                            self.assertEqual(html.count('data-measurement-id="G-TEST123"'), 1)
+                        else:
+                            self.assertNotIn("assets/analytics.js", html)
+                            self.assertNotIn("data-measurement-id", html)
+                            self.assertNotIn("googletagmanager.com", html)
 
 
 class HttpTests(FixtureCase):

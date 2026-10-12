@@ -4,6 +4,7 @@ from html import escape
 import math
 import json
 import sys
+import re
 
 ROOT = Path(__file__).parent
 DIST = ROOT / "dist"
@@ -14,6 +15,9 @@ CONTENT = json.loads((ROOT / "content.json").read_text(encoding="utf-8"))
 SITE = CONTENT["site"]
 SCHOLAR, CV = SITE["scholar_url"], SITE["cv_url"]
 PUBLIC = "--public" in sys.argv
+ANALYTICS_ID = SITE.get("analytics_id", "")
+if not isinstance(ANALYTICS_ID, str) or (ANALYTICS_ID and not re.fullmatch(r"G-[A-Z0-9]+", ANALYTICS_ID)):
+    raise ValueError("Google Analytics Measurement ID must be blank or start with G- followed by uppercase letters and digits.")
 
 
 
@@ -26,7 +30,8 @@ def preview_bar(active):
 
 def head(title, indexable=False):
     robots = '' if PUBLIC and indexable else '<meta name="robots" content="noindex,nofollow">'
-    return f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">{robots}<meta name="description" content="{escape(SITE['description'], quote=True)}"><title>{title}</title><link rel="icon" type="image/svg+xml" href="assets/favicon.svg"><link rel="stylesheet" href="assets/fonts.css"><link rel="stylesheet" href="styles.css"></head>'''
+    analytics = f'<script defer src="assets/analytics.js" data-measurement-id="{ANALYTICS_ID}"></script>' if PUBLIC and indexable and ANALYTICS_ID else ''
+    return f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">{robots}<meta name="description" content="{escape(SITE['description'], quote=True)}"><title>{title}</title><link rel="icon" type="image/svg+xml" href="assets/favicon.svg?v=2"><link rel="stylesheet" href="assets/fonts.css"><link rel="stylesheet" href="styles.css">{analytics}</head>'''
 
 def profile_links():
     items = [link(SCHOLAR,"Google Scholar"),link(SITE["github_url"],"Github"),link(SITE["anthology_url"],"ACL Anthology"),link(CV,"CV")]

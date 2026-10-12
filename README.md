@@ -7,11 +7,11 @@ The approved Research index is the homepage. The site is generated with Python a
 1. Double-click **Edit website.cmd** in this folder. Keep its small window open.
 2. Your browser opens the editor. Choose a section, then edit, add, remove, or reorder entries.
 3. Click **Save changes**, then **Preview website** to check the result.
-4. Click **Save to GitHub** to back up the changes. Once GitHub Pages is activated, this button becomes **Publish website** and starts automatic publication.
+4. Click **Publish website** to save the changes to GitHub and start automatic publication. Check the completed run in GitHub Actions if the live page has not updated yet.
 
 The editor runs only on this computer. It is never uploaded as a public administration page. Python 3.11+ is required. Saving to GitHub also requires Git and an authenticated GitHub CLI; both are configured on the current computer.
 
-While public hosting is pending, Save to GitHub does not update the private Sites preview. Ask Codex to publish that preview. The editor states which publishing mode is available.
+The public website runs on GitHub Pages at https://www.josephimperial.com/. The separate private Sites preview is updated through Codex.
 
 Links in text use `[link text](https://example.com)`. Publication forms have a separate URL field. Leave that field empty for forthcoming papers. The highlight checkbox controls the dark publication card. Dates in experience, education, and awards are free text, so ranges and multiple years are supported.
 
@@ -21,7 +21,7 @@ To close the editor, close its command window. Unsaved browser edits are not ret
 
 ## Launch at josephimperial.com
 
-The prepared route is GitHub Pages hosting with the existing domain registered at Namecheap. See [LAUNCH.md](LAUNCH.md) for the exact setup and DNS records. GitHub Pages and the domain cutover are not enabled yet. The repository remains private pending the hosting decision.
+GitHub Pages is active, HTTPS is enforced, and Namecheap points the domain to GitHub. The repository is public. See [LAUNCH.md](LAUNCH.md) for the setup and DNS records.
 
 ## Project files
 
@@ -40,4 +40,14 @@ Content, portrait, and original external links were checked against https://www.
 
 This website's design and color palette are inspired by the [Institute for Law & AI](https://law-ai.org/) website. The fine-line motif is original vector artwork generated in Python. The reference website's logo, fonts, images, and artwork are not used.
 
-Portrait copyright remains with its owner. DM Sans and Source Serif 4 are locally served under the SIL Open Font License, included in `dist/assets/licenses/`. The site loads no analytics or third-party scripts. Previous design previews remain available at `design-options.html` and retain noindex metadata.
+Portrait copyright remains with its owner. DM Sans and Source Serif 4 are locally served under the SIL Open Font License, included in `dist/assets/licenses/`. Google Analytics is enabled on the public homepage when a Measurement ID is configured. Private builds and archived design previews do not load it. Previous design previews remain available at `design-options.html` and retain noindex metadata.
+
+## Google Analytics
+
+In the editor, open **Profile → Google Analytics Measurement ID**. Enter the G- ID, then **Publish website**. Leave the field blank to turn tracking off. The ID is a public tag identifier and is stored with the website records.
+
+The configured public homepage loads the Google tag in the background. There is no visitor consent control or visual layout change. Google advertising signals and ad personalization signals are disabled in this tag. Page URLs and referrers passed by this loader omit query strings and fragments.
+
+To verify collection, open the live homepage and check the matching property's **Realtime** report in Google Analytics. Browser tracking protection and ad blockers may prevent collection. Local editor previews and private Sites builds remain untracked.
+
+[Find your Measurement ID](https://support.google.com/analytics/answer/9539598?hl=en) · [Google tag setup and verification](https://developers.google.com/tag-platform/gtagjs)

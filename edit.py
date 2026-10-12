@@ -153,6 +153,10 @@ def validate(data):
         raise ValueError("Enter a valid contact email address.")
     if not c["site"]["name"].strip():
         raise ValueError("Your name is required.")
+    analytics_id = c["site"].get("analytics_id", "")
+    string(analytics_id)
+    if analytics_id and not re.fullmatch(r"G-[A-Z0-9]+", analytics_id):
+        raise ValueError("Enter a Google Analytics Measurement ID starting with G- followed by uppercase letters and digits, or leave it blank.")
     records(p, ("year", "title", "authors", "venue", "topic", "url", "link_label"))
     for row in p:
         safe_url(row["url"], optional=True)

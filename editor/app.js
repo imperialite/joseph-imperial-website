@@ -254,7 +254,8 @@
       ["name", "Full name", {}], ["email", "Email address", { type: "email" }],
       ["description", "Website description", { multiline: true, full: true, rows: 3, hint: "Used in search results and link previews." }],
       ["scholar_url", "Google Scholar link", { type: "url" }], ["cv_url", "CV link", { type: "url" }],
-      ["github_url", "GitHub link", { type: "url" }], ["anthology_url", "ACL Anthology link", { type: "url" }]
+      ["github_url", "GitHub link", { type: "url" }], ["anthology_url", "ACL Anthology link", { type: "url" }],
+      ["analytics_id", "Google Analytics Measurement ID", { full: true, hint: "Starts with G-. Tracks visits to your live homepage. Leave blank to turn tracking off. Private previews are excluded." }]
     ]) grid.append(field(label, site[key], (value) => { site[key] = value; }, options));
     panel.append(grid);
     fields.append(panel);

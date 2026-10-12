@@ -1,6 +1,6 @@
 # Launch guide
 
-Status on 12 October 2026: the selected design and editor are prepared. The GitHub repository is private, GitHub Pages is not active, and the Namecheap records still serve the original Google Sites website.
+Status on 12 October 2026: the website is live at https://www.josephimperial.com/. The repository is public, GitHub Pages publishes automatically, Namecheap DNS validation passes, and HTTPS enforcement is enabled. The instructions below document the completed setup.
 
 ## 1. Choose repository visibility
 
