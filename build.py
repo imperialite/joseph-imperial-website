@@ -11,9 +11,8 @@ SCHOLAR = "https://scholar.google.com/citations?user=irs_5ekAAAAJ&hl=en"
 CV = "https://drive.google.com/drive/folders/1FvlEPuA5V5lDVFEz8fzwvr9fjEW6TRVS?usp=sharing"
 LAYOUTS = [("classic", "Academic folio"), ("sidebar", "Research index"), ("publications", "Journal layout")]
 
-PAPERS[4]["authors"] = "Joseph Marvin Imperial, Abdullah Barayan, Regina Stodden, Rodrigo Wilkens, Ricardo Munoz Sanchez, Lingyun Gao, Melissa Torgbi, Dawn Knight, Gail Forey, Reka R. Jablonkai, Ekaterina Kochmar, Robert Reynolds, Eugenio Ribeiro, Horacio Saggion, Elena Volodina, Sowmya Vajjala, Thomas Francois, Fernando Alva-Manchego, Harish Tayyar Madabushi"
-PAPERS[6]["authors"] = "Francisco Eiras, Aleksandar Petrov, Bertie Vidgen, Christian Schroeder de Witt, Fabio Pizzati, Katherine Elkins, Supratik Mukhopadhyay, Adel Bibi, Botos Csaba, Fabro Steibel, Fazl Barez, Genevieve Smith, Gianluca Guadagni, Jon Chun, Jordi Cabot, Joseph Marvin Imperial, Juan A. Nolazco-Flores, Lori Landay, Matthew Jackson, Paul Röttger, Philip H.S. Torr, Trevor Darrell, Yong Suk Lee, Jakob Foerster"
-(ROOT / "publications.json").write_text(json.dumps(PAPERS, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+CONTENT = json.loads((ROOT / "content.json").read_text(encoding="utf-8"))
+
 
 def link(url, label, cls=""):
     return f'<a class="{cls}" href="{escape(url, quote=True)}" target="_blank" rel="noopener noreferrer">{label}</a>'
@@ -30,7 +29,7 @@ def profile_links():
     return '<div class="profile-links">' + ''.join(items) + '</div>'
 
 def identity():
-    return f'''<header class="identity"><div class="identity-text"><p class="profile-label">Research &amp; Academic Profile</p><h1>Joseph Imperial</h1><p class="research-summary">I research the legal alignment of AI agents and the compliance of language models with policies, regulations, and expert-defined standards.</p><div class="appointments"><div><p class="appointment">Technical AI Governance Fellow</p><p class="institution">{link('https://www.pivotal-research.org/','Pivotal Research')}, United Kingdom</p></div><div><p class="appointment second-role">PhD Candidate, UKRI CDT in ART-AI</p><p class="institution">{link('https://www.bath.ac.uk/','University of Bath')}, United Kingdom</p></div></div><div class="profile-contact"><a class="email" href="mailto:jmri20@bath.ac.uk">jmri20@bath.ac.uk</a>{profile_links()}</div></div><figure class="portrait-frame"><img class="portrait" src="assets/joseph-imperial.jpg" alt="Joseph Imperial" width="1015" height="1131" fetchpriority="high"><span class="portrait-corner" aria-hidden="true"></span></figure></header>'''
+    return f'''<header class="identity"><div class="identity-text"><p class="profile-label">Research &amp; Academic Profile</p><h1>Joseph Imperial</h1><p class="research-summary">I research the legal alignment of AI agents and the compliance of language models with policies, regulations, and expert-defined standards.</p><div class="appointments">{''.join(f'<div><p class="appointment">{role}</p></div>' for role in CONTENT['profile'])}</div><div class="profile-contact"><a class="email" href="mailto:jmri20@bath.ac.uk">jmri20@bath.ac.uk</a>{profile_links()}</div></div><figure class="portrait-frame"><img class="portrait" src="assets/joseph-imperial.jpg" alt="Joseph Imperial" width="1015" height="1131" fetchpriority="high"><span class="portrait-corner" aria-hidden="true"></span></figure></header>'''
 
 def top_nav():
     cv_link=link(CV,'CV <span aria-hidden="true">↗</span>')
@@ -40,7 +39,9 @@ def section_nav():
     return f'<nav class="section-nav" aria-label="Sections"><a href="#about">About Me</a><a href="#news">News</a><a href="#selected-publications">Publications</a><a href="#experience">Experience</a><a href="#education">Education</a>{link(CV,"CV")}</nav>'
 
 def about():
-    return f'''<section class="about" id="about"><h2>About Me</h2><p>I am a Technical AI Governance Fellow at Pivotal Research and a PhD Candidate in the UKRI Centre for Doctoral Training in Accountable, Responsible and Transparent AI at the University of Bath. My research focuses on the legal alignment of AI agents and the compliance of language models with policies, regulations, and expert-defined standards.</p><p>At Pivotal Research, I work with {link('https://www.noamkolt.com/','Noam Kolt')}. I also collaborate with {link('https://law-ai.org/team/benjamin-brady/','Ben Brady')} and {link('https://cullenokeefe.com/','Cullen O’Keefe')} at the Institute for Law &amp; AI on benchmarks for law-following AI. My doctoral research is supervised by {link('https://www.harishtayyarmadabushi.com/','Harish Tayyar Madabushi')} and {link('https://researchportal.bath.ac.uk/en/persons/gail-forey-2','Gail Forey')}.</p></section>'''
+    paragraphs = ''.join(f'<p>{text}</p>' for text in CONTENT['about'])
+    return f'<section class="about" id="about"><h2>About Me</h2>{paragraphs}</section>'
+
 
 def publications():
     groups=[]
@@ -50,35 +51,54 @@ def publications():
             title=link(paper['url'], escape(paper['title']), 'paper-title') if paper['url'] else '<span class="paper-title">'+escape(paper['title'])+'</span>'
             authors=escape(paper['authors']).replace('Joseph Marvin Imperial','<strong>Joseph Marvin Imperial</strong>')
             authors=f'<p class="authors">{authors}</p>'
-            venue=paper['venue'].replace(' · ',' — ')
+            venue=escape(paper['venue'])
             if paper['url']:
                 action=link(paper['url'],'Project Page' if 'project' in paper['link_label'].lower() else 'Paper','paper-link')
             else:
                 action='<span class="preprint-note">Preprint forthcoming</span>'
             rows.append(f'<article class="paper" data-topic="{paper["topic"]}" data-year="{year}"><h4>{title}</h4>{authors}<div class="paper-footer"><span class="venue">{venue}</span>{action}</div></article>')
         groups.append(f'<div class="year-group"><h3>{year}</h3><div>{"".join(rows)}</div></div>')
-    return f'''<section class="publications" id="selected-publications"><div class="heading-row"><h2>Selected Publications</h2>{link(SCHOLAR,'Full list on Google Scholar','full-list')}</div><div class="publication-list">{''.join(groups)}</div></section>'''
+    return f'''<section class="publications" id="selected-publications"><div class="heading-row"><h2>Selected Publications</h2><p class="publication-note">{CONTENT['publication_note']}</p></div><div class="publication-list">{''.join(groups)}</div></section>'''
 
 def news():
-    return f'''<section class="news" id="news"><h2>News</h2><ul><li><strong>NeurIPS 2026.</strong> ScrapeBench, GlobalPIQA, and Jarvis-Bench have been accepted. Preprints forthcoming.</li><li><strong>EMNLP 2026.</strong> {link('https://arxiv.org/abs/2606.05421','ComplexityMT')} and {link('https://arxiv.org/abs/2503.04736','Rethinking Standard Compliance in the LLM Era')} have been accepted.</li><li><strong>Nature.</strong> Our collaborative benchmark, {link('https://www.nature.com/articles/s41586-025-09962-4','Humanity’s Last Exam')}, is now published.</li><li><strong>Invited panel.</strong> {link('https://law-ai.org/event/2026-workshop-on-law-following-ai/','Workshop on Law-Following AI')}, hosted by the Institute for Law &amp; AI at Jesus College, Cambridge.</li></ul></section>'''
+    items = ''.join(f'<li>{text}</li>' for text in CONTENT['news'])
+    return f'<section class="news" id="news"><h2>News</h2><ul>{items}</ul></section>'
+
+
+def timeline_section(key, heading, classes):
+    rows = []
+    for item in CONTENT[key]:
+        note = f'<br><small>({escape(item["note"])})</small>' if item['note'] else ''
+        paragraphs = ''.join(f'<p>{text}</p>' for text in item['paragraphs'])
+        rows.append(f'<div><dt>{escape(item["date"])}{note}</dt><dd><strong>{escape(item["title"])}</strong><span>{escape(item["institution"])}</span>{paragraphs}</dd></div>')
+    return f'<section id="{key}" class="{classes}"><h2>{heading}</h2><dl class="timeline">{"".join(rows)}</dl></section>'
+
 
 def experience():
-    return """<section id="experience" class="background experience"><h2>Experience</h2><dl class="timeline"><div><dt>2026–present</dt><dd><strong>Technical AI Governance Fellow</strong><span>Pivotal Research, London Initiative for Safe AI</span></dd></div><div><dt>2018–present<br><small>(on study leave)</small></dt><dd><strong>Senior NLP Researcher</strong><span>National University, Philippines</span><p>Managed the Human Language Technology Lab and collaborated on NLP applications in education and food nutrition.</p></dd></div><div><dt>2017–2018</dt><dd><strong>Research Fellow</strong><span>National University and Philippine-California Advanced Research Institutes</span><p>Text and speech analytics for disaster risk management, in collaboration with the University of California, Berkeley.</p></dd></div></dl></section>"""
+    return timeline_section('experience', 'Experience', 'background experience')
 
 
 def education():
-    return """<section id="education" class="background education"><h2>Education</h2><dl class="timeline"><div><dt>2022–2026<br><small>(expected)</small></dt><dd><strong>PhD in Accountable, Responsible and Transparent AI</strong><span>University of Bath, United Kingdom</span></dd></div><div><dt>2018–2021</dt><dd><strong>M.S. in Computer Science</strong><span>De La Salle University, Philippines</span></dd></div></dl></section>"""
+    return timeline_section('education', 'Education', 'background education')
 
 
 def awards():
-    return """<section class="awards"><h2>Awards &amp; Recognition</h2><ul><li>Outstanding Reviewer Award, ICML (2026, 2024) and ACL (2023)</li><li>Pivotal Research Fellowship (2025)</li><li>Doctoral Recognition Award, University of Bath (2024)</li><li>Researcher of the Year, National University Philippines (2023)</li><li>UKRI CDT Doctoral Fellowship (2022–2026)</li><li>Google AI and Tensorflow Grant (2021)</li></ul></section>"""
+    return timeline_section('awards', 'Awards &amp; Recognition', 'awards')
 
 
 def media():
-    return f'''<section class="media"><h2>Media Presence</h2><ul><li><span>AIHub</span>{link('https://aihub.org/2025/04/02/interview-with-joseph-marvin-imperial-aligning-generative-ai-with-technical-standards/','Aligning generative AI with technical standards')}</li><li><span>New Scientist</span>{link('https://www.newscientist.com/article/2473622-leading-ai-models-fail-new-test-of-artificial-general-intelligence/','Evaluating artificial general intelligence')}</li><li><span>Newsweek</span>{link('https://www.newsweek.com/openai-warns-us-government-agencies-of-rogue-activity-12492213','AI agents and safety')}</li></ul></section>'''
+    rows = ''.join(f'<li><span>{escape(item["outlet"])}</span><p>{item["html"]}</p></li>' for item in CONTENT['media'])
+    return f'<section class="media" id="media"><h2>Media Presence</h2><ul>{rows}</ul></section>'
+
+
+def socials():
+    items = ''.join(f'<li>{link(item["url"],escape(item["label"]))}</li>' for item in CONTENT['socials'])
+    return f'<section class="socials" id="socials"><h2>Socials</h2><ul>{items}</ul></section>'
+
 
 def footer():
-    return f'''<footer><span>Joseph Imperial</span><a href="mailto:jmri20@bath.ac.uk">jmri20@bath.ac.uk</a><div>{link('https://www.linkedin.com/in/josephimperial/','LinkedIn')} · {link('https://x.com/josephimperial_','X')} · {link('https://www.researchgate.net/profile/Joseph_Marvin_Imperial','ResearchGate')}</div></footer>'''
+    return '<footer><span>Joseph Imperial</span><a href="mailto:jmri20@bath.ac.uk">jmri20@bath.ac.uk</a></footer>'
+
 
 paths=[]
 for ring in range(38):
@@ -94,11 +114,11 @@ for ring in range(38):
 
 for key,name in LAYOUTS:
     if key=='sidebar':
-        main=f'<div class="index-layout wrap"><aside class="profile-column">{identity()}{section_nav()}</aside><main id="main" class="content-column">{about()}{news()}{publications()}{experience()}{education()}{awards()}{media()}{footer()}</main></div>'
+        main=f'<div class="index-layout wrap"><aside class="profile-column">{identity()}{section_nav()}</aside><main id="main" class="content-column">{about()}{news()}{publications()}{experience()}{education()}{awards()}{media()}{socials()}{footer()}</main></div>'
     elif key=='publications':
-        main=f'<div class="journal-masthead">{top_nav()}<div class="wrap">{identity()}</div></div><main id="main" class="content-column wrap">{publications()}{about()}{news()}{experience()}{education()}{awards()}{media()}{footer()}</main>'
+        main=f'<div class="journal-masthead">{top_nav()}<div class="wrap">{identity()}</div></div><main id="main" class="content-column wrap">{publications()}{about()}{news()}{experience()}{education()}{awards()}{media()}{socials()}{footer()}</main>'
     else:
-        main=f'<div class="folio-masthead">{top_nav()}<div class="wrap">{identity()}</div></div><main id="main" class="content-column wrap">{about()}{news()}{publications()}{experience()}{education()}{awards()}{media()}{footer()}</main>'
+        main=f'<div class="folio-masthead">{top_nav()}<div class="wrap">{identity()}</div></div><main id="main" class="content-column wrap">{about()}{news()}{publications()}{experience()}{education()}{awards()}{media()}{socials()}{footer()}</main>'
     (DIST/f'{key}.html').write_text(head(f'Joseph Imperial | {name}')+f'<body class="academic {key}" id="top"><a class="skip-link" href="#main">Skip to content</a>{preview_bar(key)}{main}</body></html>',encoding='utf-8')
 
 descriptions={

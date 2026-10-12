@@ -17,13 +17,13 @@ Open `http://localhost:8765`. Python uses only the standard library. The site is
 
 ## Editing
 
-`build.py` generates the pages. `publications.json` contains publication records. `dist/styles.css` controls presentation. Publications are a complete chronological list without search or topic filters. The Research index places News directly after About Me. Full author lists appear directly beneath each publication title. Experience and Education have separate sections. Section entries share a consistent type scale, with compact publication spacing.
+`build.py` generates the pages. `content.json` contains the complete original profile, biography, news, experience, education, awards, media entries, and social links. `publications.json` contains complete publication records, venues, and author names. Edit these content files without shortening the original wording. `dist/styles.css` controls presentation. Publications are a complete chronological list without search or topic filters. The Research index places News directly after About Me. Full author lists appear directly beneath each publication title. Experience and Education have separate sections. Section entries share a consistent type scale, with compact publication spacing.
 
 The comparison page uses screenshots of the actual layouts in `dist/assets/*-preview.jpg`. Regenerate them after changing the layouts.
 
 ## Content and assets
 
-Biography, roles, publications, announcements, portrait, and external links came from https://www.josephimperial.com/ on 11 October 2026. Publication acceptance announcements are reproduced from that site. ScrapeBench has no preprint link in the source and is marked forthcoming. The CV link opens the original Google Drive folder.
+Biography, roles, publications, announcements, portrait, and external links came from https://www.josephimperial.com/ and were checked in full on 12 October 2026. Publication acceptance announcements are reproduced from that site. ScrapeBench has no preprint link in the source and is marked forthcoming. The CV link opens the original Google Drive folder.
 
 Portrait copyright remains with its owner. DM Sans and Source Serif 4 are locally served under the SIL Open Font License in `dist/assets/licenses/`. The reference's logo, font files, images, and artwork are not used. No analytics or third-party scripts are loaded.
 

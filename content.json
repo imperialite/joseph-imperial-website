@@ -1,0 +1,172 @@
+{
+  "source_url": "https://www.josephimperial.com/",
+  "source_checked": "2026-10-12",
+  "profile": [
+    "Technical AI Governance Fellow at Pivotal Research, UK",
+    "PhD Candidate at UKRI CDT for Accountable, Responsible, and Transparent AI (ART-AI), University of Bath, UK"
+  ],
+  "about": [
+    "I'm a researcher working at the intersection of technical AI safety and governance, with a special focus on legal alignment of AI agents and assessing compliance capabilities of AI. As we accelerate toward a potential intelligence explosion with AI, we need to ensure that these technologies are safe, lawful, and aligned with human values.",
+    "I'm extremely active in collaborating with fellow researchers from the AI, law, governance, and safety space. Currently, I'm working with <a href=\"https://www.noamkolt.com/\" target=\"_blank\" rel=\"noopener noreferrer\">Prof. Noam Kolt</a> on the legal alignment of AI agents as part of my Pivotal Fellowship. Consequently, I'm also collaborating with <a href=\"https://law-ai.org/team/benjamin-brady/\" target=\"_blank\" rel=\"noopener noreferrer\">Ben Brady</a> and <a href=\"https://cullenokeefe.com/\" target=\"_blank\" rel=\"noopener noreferrer\">Cullen O'Keefe</a> from the Institute for Law &amp; AI on benchmarking the law-following capabilities of AI agents.",
+    "My work is often published at high-impact venues, including NeurIPS, ACL, EMNLP, ICML, and ICLR.",
+    "Before moving to the UK, I worked as a Senior NLP Researcher in the Human Language Technology Lab at National University in the Philippines."
+  ],
+  "news": [
+    "My ScrapeBench project has been accepted to NeurIPS 2026.  My other co-authored papers, GlobalPIQA and Jarvis-Bench, have also been accepted. Preprints soon!",
+    "Two papers, <a href=\"https://arxiv.org/abs/2606.05421\" target=\"_blank\" rel=\"noopener noreferrer\">ComplexityMT</a> and a <a href=\"https://arxiv.org/abs/2503.04736\" target=\"_blank\" rel=\"noopener noreferrer\">position paper</a> on rethinking compliance in LLMs, have been accepted to EMNLP 2026!",
+    "I reached <a href=\"https://scholar.google.com/citations?user=irs_5ekAAAAJ&amp;hl=en\" target=\"_blank\" rel=\"noopener noreferrer\">2,000 citations</a> in Google Scholar.",
+    "Invited panel talk at the <a href=\"https://law-ai.org/event/2026-workshop-on-law-following-ai/\" target=\"_blank\" rel=\"noopener noreferrer\">Workshop on Law-Following AI</a> hosted by the Institute for Law &amp; AI, Centre for the Future of Intelligence in Jesus College, Cambridge.",
+    "<a href=\"https://arxiv.org/abs/2601.23094\" target=\"_blank\" rel=\"noopener noreferrer\">Dynamic Epistemic Fallback</a> has been accepted to the ICML AI for Law (AI4Law) Workshop.",
+    "<a href=\"https://arxiv.org/abs/2509.23291\" target=\"_blank\" rel=\"noopener noreferrer\">Scaling Policy Reasoning Traces</a> has been accepted to the ICML Technical AI Governance Research (TAIGR) Workshop.",
+    "Our <a href=\"https://www.nature.com/articles/s41586-025-09962-4\" target=\"_blank\" rel=\"noopener noreferrer\">Humanity's Last Exam</a> Benchmark is now published in Nature.",
+    "I'm thrilled to have been awarded the <a href=\"https://www.pivotal-research.org/fellowship#faq\" target=\"_blank\" rel=\"noopener noreferrer\">Pivotal Research Fellowship</a>. I will work with Prof. Noam Kolt and will be based at the London Initiative for Safe AI (LISA) Office."
+  ],
+  "publication_note": "Please check my <a href=\"https://scholar.google.com/citations?user=irs_5ekAAAAJ&amp;hl=en\" target=\"_blank\" rel=\"noopener noreferrer\">Google Scholar</a> for the complete list.",
+  "experience": [
+    {
+      "title": "Technical AI Governance Fellow",
+      "institution": "Pivotal Research, London Initiative for Safe AI",
+      "date": "2026",
+      "note": "ongoing",
+      "paragraphs": [
+        "Working on legal alignment of frontier AI agents under Noam Kolt (GOAL). Also collaborating with Ben Brady and Cullen O'Keefe at the Institute for Law &amp; AI on developing benchmarks for law-following AI. This is a non-internship research program."
+      ]
+    },
+    {
+      "title": "Senior NLP Researcher",
+      "institution": "National University Philippines",
+      "date": "2018",
+      "note": "on study leave",
+      "paragraphs": [
+        "Managed the NU HLT Lab, which housed undergraduate students working on NLP projects, and collaborated with industry partners on NLP use cases in education and food nutrition."
+      ]
+    },
+    {
+      "title": "Research Fellow",
+      "institution": "National University Philippines and Philippine-California Advanced Research Institutes",
+      "date": "2017–2018",
+      "note": "",
+      "paragraphs": [
+        "Worked on the  E-Participation 2.0: Connective Diverse Philippine Populations for Disaster Risk Management with a Toolkit Integrating Text and Speech Analytics, a two-year collaborative project with the University of California, Berkeley."
+      ]
+    }
+  ],
+  "education": [
+    {
+      "title": "Ph.D. in Accountable, Responsible, and Transparent AI (ART-AI)",
+      "institution": "University of Bath, UK",
+      "date": "2022–2026",
+      "note": "expected",
+      "paragraphs": [
+        "Working on the compliance dynamics and alignment of LLMs with multi-domain policies and regulations. Supervised by <a href=\"https://www.harishtayyarmadabushi.com/\" target=\"_blank\" rel=\"noopener noreferrer\">Dr. Harish Tayyar Madabushi</a> and <a href=\"https://researchportal.bath.ac.uk/en/persons/gail-forey-2\" target=\"_blank\" rel=\"noopener noreferrer\">Dr. Gail Forey</a>.",
+        "Supported by UKRI Doctoral Fellowship, Pivotal Research Fellowship, and the National University Study Grant Program."
+      ]
+    },
+    {
+      "title": "M.S. in Computer Science",
+      "institution": "De La Salle University, Philippines",
+      "date": "2018–2021",
+      "note": "",
+      "paragraphs": [
+        "Conducted the most extensive set of explorations of linguistic features for machine learning-based Filipino readability classification under the guidance of <a href=\"https://scholar.google.com/citations?user=mssKyjgAAAAJ\" target=\"_blank\" rel=\"noopener noreferrer\">Dr. Ethel Ong</a>.",
+        "Supported by the DLSU St. La Salle Scholarship and the National University Study Grant Program."
+      ]
+    }
+  ],
+  "awards": [
+    {
+      "title": "Pivotal Research Fellowship",
+      "institution": "Pivotal Research and London Initiative for Safe AI",
+      "date": "2025",
+      "note": "",
+      "paragraphs": []
+    },
+    {
+      "title": "Doctoral Recognition Award",
+      "institution": "University of Bath",
+      "date": "2024",
+      "note": "",
+      "paragraphs": []
+    },
+    {
+      "title": "Researcher of the Year Award",
+      "institution": "National University Philippines",
+      "date": "2023",
+      "note": "",
+      "paragraphs": []
+    },
+    {
+      "title": "Outstanding Reviewer Award",
+      "institution": "ICML (2026, 2024), ACL (2023)",
+      "date": "2026, 2024, 2023",
+      "note": "",
+      "paragraphs": []
+    },
+    {
+      "title": "UKRI CDT Doctoral Fellowship",
+      "institution": "UK Research and Innovation",
+      "date": "2022–2026",
+      "note": "",
+      "paragraphs": []
+    },
+    {
+      "title": "Google AI and Tensorflow Grant",
+      "institution": "Google",
+      "date": "2021",
+      "note": "",
+      "paragraphs": []
+    }
+  ],
+  "media": [
+    {
+      "outlet": "Newsweek",
+      "html": "Quoted in a <a href=\"https://www.newsweek.com/openai-warns-us-government-agencies-of-rogue-activity-12492213\" target=\"_blank\" rel=\"noopener noreferrer\">Newsweek article</a> on what OpenAI's agent swarm hacking means for AI safety"
+    },
+    {
+      "outlet": "AIHub",
+      "html": "<a href=\"https://aihub.org/2025/04/02/interview-with-joseph-marvin-imperial-aligning-generative-ai-with-technical-standards/\" target=\"_blank\" rel=\"noopener noreferrer\">Interview</a> with AIHub on my PhD research at AAAI 2025."
+    },
+    {
+      "outlet": "New Scientist",
+      "html": "<a href=\"https://www.newscientist.com/article/2473622-leading-ai-models-fail-new-test-of-artificial-general-intelligence/\" target=\"_blank\" rel=\"noopener noreferrer\">Interview</a> with Chris Stokel-Walker for The New Scientist on the future evaluations of AGI models."
+    },
+    {
+      "outlet": "PEP Magazine",
+      "html": "<a href=\"https://www.pep.ph/news/local/171955/deepfakes-pros-and-cons-a738-20230307-lfrm\" target=\"_blank\" rel=\"noopener noreferrer\">Interview</a> with PEP Magazine on the dangers of privacy of deepfakes."
+    },
+    {
+      "outlet": "The New York Times",
+      "html": "Our Humanity's Last Exam (HLE) benchmark <a href=\"https://www.nytimes.com/2025/01/23/technology/ai-test-humanitys-last-exam.html\" target=\"_blank\" rel=\"noopener noreferrer\">featured</a> on The New York Times."
+    }
+  ],
+  "socials": [
+    {
+      "label": "Google Scholar",
+      "url": "https://scholar.google.com/citations?user=irs_5ekAAAAJ&hl=en"
+    },
+    {
+      "label": "LinkedIn",
+      "url": "https://www.linkedin.com/in/josephimperial/"
+    },
+    {
+      "label": "Twitter",
+      "url": "https://x.com/josephimperial_"
+    },
+    {
+      "label": "Github",
+      "url": "https://github.com/imperialite"
+    },
+    {
+      "label": "ACL Anthology",
+      "url": "https://aclanthology.org/people/joseph-marvin-imperial/"
+    },
+    {
+      "label": "ResearchGate",
+      "url": "https://www.researchgate.net/profile/Joseph_Marvin_Imperial"
+    },
+    {
+      "label": "CV",
+      "url": "https://drive.google.com/drive/folders/1FvlEPuA5V5lDVFEz8fzwvr9fjEW6TRVS?usp=sharing"
+    }
+  ]
+}

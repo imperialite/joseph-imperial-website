@@ -2,8 +2,8 @@
   {
     "year": "2026",
     "title": "ScrapeBench: Evaluating Legal Compliance of AI Agents in Website Scraping",
-    "authors": "Joseph Marvin Imperial, Daniel Slate, and Noam Kolt",
-    "venue": "NeurIPS · Main",
+    "authors": "Joseph Marvin Imperial*, Daniel Slate, and Noam Kolt",
+    "venue": "NeurIPS 2026 (Main)",
     "topic": "governance",
     "url": "",
     "link_label": "Preprint forthcoming"
@@ -11,8 +11,8 @@
   {
     "year": "2026",
     "title": "Rethinking Standard Compliance in the LLM Era",
-    "authors": "Joseph Marvin Imperial, Matthew Jones, and Harish Tayyar Madabushi",
-    "venue": "EMNLP · Findings",
+    "authors": "Joseph Marvin Imperial*, Matthew Jones, and Harish Tayyar Madabushi",
+    "venue": "EMNLP 2026 (Findings)",
     "topic": "governance",
     "url": "https://arxiv.org/abs/2503.04736",
     "link_label": "Read paper"
@@ -20,17 +20,17 @@
   {
     "year": "2026",
     "title": "Scaling Policy Compliance Assessment in Language Models with Policy Reasoning Traces",
-    "authors": "Joseph Marvin Imperial and Harish Tayyar Madabushi",
-    "venue": "ICML · TAIGR Workshop",
+    "authors": "Joseph Marvin Imperial* and Harish Tayyar Madabushi",
+    "venue": "ICML Workshop on Technical AI Governance Research 2026",
     "topic": "governance",
-    "url": "https://arxiv.org/abs/2509.23291",
+    "url": "https://www.arxiv.org/abs/2509.23291",
     "link_label": "Read paper"
   },
   {
     "year": "2026",
     "title": "Safer Policy Compliance with Dynamic Epistemic Fallback",
-    "authors": "Joseph Marvin Imperial and Harish Tayyar Madabushi",
-    "venue": "ICML · AI for Law Workshop",
+    "authors": "Joseph Marvin Imperial* and Harish Tayyar Madabushi",
+    "venue": "ICML Workshop on AI for Law 2026",
     "topic": "governance",
     "url": "https://arxiv.org/abs/2601.23094",
     "link_label": "Read paper"
@@ -38,8 +38,8 @@
   {
     "year": "2025",
     "title": "UniversalCEFR: Enabling Open Multilingual Research on Language Proficiency Assessment",
-    "authors": "Joseph Marvin Imperial, Abdullah Barayan, Regina Stodden, Rodrigo Wilkens, Ricardo Munoz Sanchez, Lingyun Gao, Melissa Torgbi, Dawn Knight, Gail Forey, Reka R. Jablonkai, Ekaterina Kochmar, Robert Reynolds, Eugenio Ribeiro, Horacio Saggion, Elena Volodina, Sowmya Vajjala, Thomas Francois, Fernando Alva-Manchego, Harish Tayyar Madabushi",
-    "venue": "EMNLP · Main",
+    "authors": "Joseph Marvin Imperial*, Abdullah Barayan, Regina Stodden, Rodrigo Wilkens, Ricardo Munoz Sanchez, Lingyun Gao, Melissa Torgbi, Dawn Knight, Gail Forey, Reka R. Jablonkai, Ekaterina Kochmar, Robert Reynolds, Eugenio Ribeiro, Horacio Saggion, Elena Volodina, Sowmya Vajjala, Thomas Francois, Fernando Alva-Manchego, Harish Tayyar Madabushi.",
+    "venue": "EMNLP 2025 (Main)",
     "topic": "language",
     "url": "https://universalcefr.github.io/",
     "link_label": "View project"
@@ -47,8 +47,8 @@
   {
     "year": "2024",
     "title": "Standardize: Aligning Language Models with Expert-Defined Standards for Content Generation",
-    "authors": "Joseph Marvin Imperial, Gail Forey, and Harish Tayyar Madabushi",
-    "venue": "EMNLP · Oral",
+    "authors": "Joseph Marvin Imperial*, Gail Forey, and Harish Tayyar Madabushi",
+    "venue": "EMNLP 2024 (Oral)",
     "topic": "language",
     "url": "https://imperialite.github.io/standardize/",
     "link_label": "View project"
@@ -56,8 +56,8 @@
   {
     "year": "2024",
     "title": "Near to Mid-term Risks and Opportunities of Open Source Generative AI",
-    "authors": "Francisco Eiras, Aleksandar Petrov, Bertie Vidgen, Christian Schroeder de Witt, Fabio Pizzati, Katherine Elkins, Supratik Mukhopadhyay, Adel Bibi, Botos Csaba, Fabro Steibel, Fazl Barez, Genevieve Smith, Gianluca Guadagni, Jon Chun, Jordi Cabot, Joseph Marvin Imperial, Juan A. Nolazco-Flores, Lori Landay, Matthew Jackson, Paul Röttger, Philip H.S. Torr, Trevor Darrell, Yong Suk Lee, Jakob Foerster",
-    "venue": "ICML · Oral",
+    "authors": "Francisco Eiras, Aleksandar Petrov, Bertie Vidgen, Christian Schroeder de Witt, Fabio Pizzati, Katherine Elkins, Supratik Mukhopadhyay, Adel Bibi, Botos Csaba, Fabro Steibel, Fazl Barez, Genevieve Smith, Gianluca Guadagni, Jon Chun, Jordi Cabot, Joseph Marvin Imperial*, Juan A. Nolazco-Flores, Lori Landay, Matthew Jackson, Paul Röttger, Philip H.S. Torr, Trevor Darrell, Yong Suk Lee, Jakob Foerster",
+    "venue": "ICML 2024 (Oral)",
     "topic": "governance",
     "url": "https://arxiv.org/abs/2404.17047",
     "link_label": "Read paper"

@@ -15,7 +15,7 @@ body.publications{background:#fff}.journal-masthead{position:relative;background
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
 body.academic .appointment,body.academic .institution{font-size:12px;line-height:1.7}body.academic .profile-contact,body.academic .profile-links{font-size:12px}body.academic .section-nav{font-size:12px}
 @media(max-width:480px){body.academic .appointments{display:block}body.academic .appointments>div+div{margin-top:12px}}
-@media(min-width:601px) and (max-height:999px){.profile-column{position:relative;top:auto}}
+@media(min-width:601px) and (max-height:1099px){.profile-column{position:relative;top:auto}}
 
 /* Shared reading scale across academic sections, including narrow screens. */
 body.academic { --section-size:23px; --entry-size:16px; --detail-size:12px; }
@@ -53,4 +53,36 @@ body.academic .content-column .timeline>div,
 body.academic .content-column .media li { padding-block:14px; }
 @media(max-width:600px) {
   body.academic .content-column .year-group>h3 { margin-bottom:14px; }
+}
+
+/* Complete source content and shared academic record rows. */
+.publication-note { font-size:12px; line-height:1.6; }
+body.academic .content-column .timeline dd>p { font-size:14px; line-height:1.65; margin-top:9px; }
+body.academic .content-column .timeline dd>p a { color:inherit; border-bottom:1px solid #9bb7db; }
+body.academic .content-column .media li>p { font-size:var(--entry-size); line-height:1.55; }
+body.academic .content-column .awards .timeline { margin-top:27px; }
+body.academic.classic .content-column .awards .timeline { margin-top:0; }
+.socials ul { list-style:none; padding:0; margin:27px 0 0; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:0 25px; }
+.socials li { font-size:16px; border-top:1px solid #d9d9d4; padding:14px 0; }
+.socials a { color:#3b3b3b; }
+.socials a:hover { color:#1567e8; }
+body.publications .socials { max-width:925px; margin-left:auto; }
+body.classic .socials { padding-left:285px; }
+body.classic .socials>h2 { position:absolute; margin-left:-285px; width:220px; }
+body.classic .socials ul { margin-top:0; }
+@media(max-width:1100px) {
+  body.classic .socials { padding-left:215px; }
+  body.classic .socials>h2 { margin-left:-215px; width:175px; }
+}
+@media(max-width:900px) {
+  body.classic .socials { padding-left:165px; }
+  body.classic .socials>h2 { margin-left:-165px; width:140px; }
+  .socials ul { grid-template-columns:repeat(2,minmax(0,1fr)); }
+}
+@media(max-width:600px) {
+  .publication-note { margin-top:12px; }
+  body.academic.classic .content-column .awards .timeline { margin-top:24px; }
+  body.classic .socials { padding-left:0; }
+  body.classic .socials>h2 { position:static; margin-left:0; width:auto; }
+  body.classic .socials ul { margin-top:24px; }
 }
