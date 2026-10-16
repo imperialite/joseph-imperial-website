@@ -75,7 +75,14 @@
   ],
   "awards": [
     {
-      "title": "Pivotal Research Fellowship",
+      "title": "Digital Minds Career Development Fellowship",
+      "institution": "Future Impact Group",
+      "date": "2026",
+      "note": "",
+      "paragraphs": []
+    },
+    {
+      "title": "Pivotal Research Fellowship for Technical AI Governance",
       "institution": "Pivotal Research and London Initiative for Safe AI",
       "date": "2025",
       "note": "",
