@@ -2,13 +2,12 @@
   "source_url": "https://www.josephimperial.com/",
   "source_checked": "2026-10-12",
   "profile": [
-    "Digital Minds Career Development Fellow, <a href=\"https://futureimpact.group/\" target=\"_blank\" rel=\"noopener noreferrer\">Future Impact Group (FIG)</a>",
-    "Incoming Visiting Fellow at the <a href=\"https://law-ai.org/\" target=\"_blank\" rel=\"noopener noreferrer\">Institute for Law &amp; AI (LawAI)</a>",
+    "Visiting Fellow at the <a href=\"https://law-ai.org/\" target=\"_blank\" rel=\"noopener noreferrer\">Institute for Law &amp; AI (LawAI)</a>",
     "PhD Candidate at UKRI CDT for Accountable, Responsible, and Transparent AI (ART-AI), University of Bath, UK"
   ],
   "about": [
     "I&#x27;m a researcher working at the intersection of technical AI safety and governance, with a special focus on the legal alignment of AI agents and the assessment of frontier AI capabilities. As we accelerate toward a potential intelligence explosion with AI, we need to ensure that these technologies are safe and lawful by aligning them with our human values.",
-    "Currently, I&#x27;m working on benchmarking how AI agents apply the rule of law to humans and digital minds as part of my <a href=\"https://futureimpact.group/\" target=\"_blank\" rel=\"noopener noreferrer\">Digital Minds Career Development Fellowship</a>.\n\nPreviously, I&#x27;ve worked with <a href=\"https://www.noamkolt.com/\" target=\"_blank\" rel=\"noopener noreferrer\">Noam Kolt</a> to evaluate the legal compliance of AI agents with respect to website scraping policies as part of my <a href=\"https://www.pivotal-research.org/\" target=\"_blank\" rel=\"noopener noreferrer\">Pivotal Fellowship</a>. Consequently, I&#x27;ve also collaborated with <a href=\"https://law-ai.org/team/benjamin-brady/\" target=\"_blank\" rel=\"noopener noreferrer\">Ben Brady</a> and <a href=\"https://cullenokeefe.com/\" target=\"_blank\" rel=\"noopener noreferrer\">Cullen O&#x27;Keefe</a> from the <a href=\"https://law-ai.org/\" target=\"_blank\" rel=\"noopener noreferrer\">Institute for Law &amp; AI</a> on developing a benchmark for law-following capabilities of AI agents.",
+    "I&#x27;m an incoming Visiting Fellow at the <a href=\"https://law-ai.org/\" target=\"_blank\" rel=\"noopener noreferrer\">Institute for Law &amp; AI</a> to work on empirical strategies to improve law-following capabilities of frontier AI agents with <a href=\"https://cullenokeefe.com/\" target=\"_blank\" rel=\"noopener noreferrer\">Cullen O&#x27;Keefe</a> and the Legal Frontiers team. Previously, I&#x27;ve worked with <a href=\"https://www.noamkolt.com/\" target=\"_blank\" rel=\"noopener noreferrer\">Noam Kolt</a> to evaluate the legal compliance of AI agents regarding website scraping policies as part of my <a href=\"https://www.pivotal-research.org/\" target=\"_blank\" rel=\"noopener noreferrer\">Pivotal Fellowship</a>. ",
     "My work is often published at high-impact venues, including NeurIPS, ACL, EMNLP, ICML, ICLR, and Nature.",
     "Before moving to the UK, I worked as a Senior NLP Researcher in the Human Language Technology Lab at National University in the Philippines."
   ],
@@ -75,13 +74,6 @@
     }
   ],
   "awards": [
-    {
-      "title": "Digital Minds Career Development Fellowship",
-      "institution": "Future Impact Group",
-      "date": "2026",
-      "note": "",
-      "paragraphs": []
-    },
     {
       "title": "Pivotal Research Fellowship for Technical AI Governance",
       "institution": "Pivotal Research and London Initiative for Safe AI",
